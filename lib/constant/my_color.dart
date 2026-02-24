@@ -1,0 +1,115 @@
+import 'package:flutter/material.dart';
+
+class MyColor {
+  static const appTheme = Color(0xff48335C);
+  static const appTheme2 = Color(0xff181544);
+  static const purple = Color(0xff5E3B70);
+  static const white = Colors.white;
+  static const black = Colors.black;
+  static const yellow = Colors.yellow;
+  static const red = Color(0xffEB3039);
+  static const blue1 = Color(0xff0010BB);
+  static const blueLite1 = Color(0xffC8BCD3);
+  static const blueLite = Color(0xffF1E2FF);
+  static const liteOrange = Color(0xffFFE5D6);
+  static const liteGray = Color(0xff878787);
+  static const grayLite = Color(0xffDCDCDC);
+  static const grayLite1 = Color(0xff878787);
+  static const grayLite2 = Color(0xffDADADA);
+  static const otpColor = Color(0xffDDDDDD);
+  static const liteYellowOtp = Color(0xffFCF8EB);
+  static const liteYellowBottom = Color(0xffEEE9D9);
+  static const bottomIconColor = Color(0xff8A8576);
+  static const liteGrayB5B5B5 = Color(0xffB5B5B5);
+  static const yellowF6F1E1 = Color(0xffF6F1E1);
+  static const colorDADADA = Color(0xffDADADA);
+    static const colorE15C0A = Color(0xffE15C0A);
+  static const colorFFFED6 = Color(0xffFFFED6);
+  static const colorE2FFE4 = Color(0xffE2FFE4);
+  static const colorE5FFF0 = Color(0xffE5FFF0);
+  static const colorE2EBFF = Color(0xffE2EBFF);
+  static const colorE7F3FB = Color(0xffE7F3FB);
+  static const colorFFD6D6 = Color(0xffFFD6D6);
+  static const colorE0FFC6 = Color(0xffE0FFC6);
+  static const colorE2E2E2 = Color(0xffE2E2E2);
+  static const color1C1C1C = Color(0xff1C1C1C);
+  static const colorE5E9F4 = Color(0xffE5E9F4);
+  static const colorF8F0FF = Color(0xffF8F0FF);
+  static const lightPink = Color(0xffF9E0ED);
+  static const colorFFF0FF8 = Color(0xffFFF0E8);
+  static const color2721E2 = Color(0xff2721E2);
+  static const colorEDEFFF = Color(0xffEDEFFF);
+  static const colorF4F6FF = Color(0xffF4F6FF);
+  static const colorF3E6FF = Color(0xffF3E6FF);
+  static const colorD8DCE4 = Color(0xffD8DCE4);
+  static const color8C8886 = Color(0xff8C8886);
+  static const colorEFF0F2B8 = Color(0xffEFF0F2B8);
+  static const orange = Color(0xffF7AA64);
+  static const darkOrange = Color(0xffFF902B);
+  static const red1 = Color(0xffD64641);
+  static const red2 = Color(0xffDD5759);
+  static const dividerYellow = Color(0xffF0D400);
+  static const pink = Color(0xffFE365A6);
+  static const sky = Color(0xff70BBE8);
+  static const sky1 = Color(0xff79BCEA);
+  static const color47A7E0 = Color(0xff47A7E0);
+  static const colorFFF8F4 = Color(0xffFFF8F4);
+  static const colorF3FFF2 = Color(0xffF3FFF2);
+  static const darkSky = Color(0xff00AEEF);
+  static const green = Color(0xff48B776);
+  static const darkYellow = Color(0xffFFCC38);
+  static const darkYellow2 = Color(0xffFFBE00);
+  static const darkBlue = Color(0xff005E89);
+  static const darkPink = Color(0xffBE4076);
+  static const neonColor = Color(0xff7ECBB6);
+  static const brownColor = Color(0xffAF8028);
+  static const copperRed = Color(0xffCB7D4B);
+  static const blue = Color(0xff2448BC);
+  static const purpleNavy = Color(0xff645EA9);
+  static const deepPurple = Color(0xFF7951C9);
+  static const darkGreen = Color(0xff00933D);
+  static const olive = Color(0xFF99BE4E);
+  static const pastel = Color(0xFF60B1C2);
+  static const goldenOrange = Color(0xFFE9904A);
+  static const aquamarine = Color(0xFF3BE2AA);
+  static const magenta = Color(0xFFC1529F);
+  static const grey = Color(0xff696969);
+  static const grey1 = Color(0xff4B4B4B);
+  static const grey2 = Color(0xff959595);
+  static const grey3 = Color(0xffF2F2F2);
+  static const color48335CB2 = Color(0xff48335C);
+  static const color555555 = Color(0xff555555);
+  static const colorD6D2DB = Color(0xffD6D2DB);
+  static const colorF4F3F5 = Color(0xFFF4F3F5);
+  static const color000000 = Color(0xFF000000);
+  static const colorDDD9E0 = Color(0xFFDDD9E0);
+  static const colorFF9D00 = Color(0xFFFF9D00);
+  static const colorF5F2E6 = Color(0xFFF5F2E6);
+  static const colorDCD8E0 = Color(0xFFDCD8E0);
+  static const colorE5E7EE = Color(0xFFE5E7EE);
+  static const colorDBE5DA = Color(0xFFDBE5DA);
+  ///.....avi
+  static const appbarbg = Color(0xffF6F1E1);
+  static const whitecolor = Color(0xffFFFFFF);
+  static const blackcolor = Color(0xff000000);
+  static const lightpink = Color(0xffF4F2F6);
+  static const graycolor = Color(0xff504C53);
+  static const purplecolor = Color(0xff48335C);
+  static const lightgreencolor = Color(0xffEFFFF0);
+  static const lightyellowcolor = Color(0xffFFFEE4);
+  static const redcolor = Color(0xffEB3039);
+  static const textfeaildcolor = Color(0xffF4F2F6);
+
+  /// Vaibhav
+  static const kFieldBorderColor = Color(0XFFAEAEAE);
+
+}
+
+class Fonts {
+  static const beVietnamProBold = 'BeVietnamProBold';
+  static const beVietnamProSemiBold = 'BeVietnamProSemiBold';
+  static const beVietnamProMedium = 'BeVietnamProMedium';
+  static const beVietnamProLight = 'BeVietnamProLight';
+  static const beVietnamProRegular = 'BeVietnamProRegular';
+  static const beVietnamProExtraLight = 'BeVietnamProExtraLight';
+}
