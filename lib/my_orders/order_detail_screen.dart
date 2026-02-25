@@ -16,23 +16,27 @@ import 'dart:convert' as convert;
 import 'dart:developer' as developer;
 
 class OrderDetailsScreen extends StatefulWidget {
-  final String selectId ;
+  final String selectId;
+
   final String deliveredType;
-  const OrderDetailsScreen({super.key, required this.selectId, required this.deliveredType});
+
+  const OrderDetailsScreen(
+      {super.key, required this.selectId, required this.deliveredType});
 
   @override
   State<OrderDetailsScreen> createState() => _OrderDetailsScreenState();
 }
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
-
   OrderDetailModel orderDetailData = OrderDetailModel();
+
   @override
   void initState() {
     // TODO: implement initState
     orderDetailsApi(context);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
@@ -40,11 +44,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         showBack: true,
         backgroundColor: MyColor.yellowF6F1E1,
         context: context,
-        title:   "Order Details",
+        title: "Order Details",
         iconColor: Colors.black,
         centerTitle: false,
       ),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -63,32 +66,53 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 children: [
                   Row(
                     children: [
-                       Text(
-                         "${orderDetailData.data?.uniqueId ?? "--"}",
-                        style:boldTextStyle(
-                            fontSize: 16.0, color: MyColor.black),
+                      Text(
+                        "${orderDetailData.data?.uniqueId ?? "--"}",
+                        style:
+                            boldTextStyle(fontSize: 16.0, color: MyColor.black),
                       ),
                       const Spacer(),
                       SvgPicture.asset(
-                        widget.deliveredType == "On The Way" ?   AssetsPath.onTheway:   widget.deliveredType == "New" ?AssetsPath.New:AssetsPath.deliveredIcon,
+                        widget.deliveredType == "New"
+                            ? AssetsPath.New
+                            : widget.deliveredType == "Order Received"
+                                ? AssetsPath.orderReceivedIconNew
+                                : widget.deliveredType == "Shipped"
+                                    ? AssetsPath.shippedIconNew
+                                    : widget.deliveredType == "Cancelled"
+                                        ? AssetsPath.cancelledIconNew
+                                        : AssetsPath.deliveredIcon,
                         height: 18,
                         width: 18,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         widget.deliveredType,
-                        style:mediumTextStyle(
-                            fontSize: 13.0, color:widget.deliveredType == "On The Way" ? MyColor.colorE15C0A : Colors.green),
+                        style: mediumTextStyle(
+                            fontSize: 13.0,
+                            color: widget.deliveredType == "New"
+                                ? Colors.green
+                                : widget.deliveredType == "Order Received"
+                                ? Color(0XFF7941AA)
+                                : widget.deliveredType == "Shipped"
+                                ? Color(0XFFE15C0A)
+                                : widget.deliveredType == "Cancelled"
+                                ? Color(0XFFF30000)
+                                : MyColor.colorE15C0A,),
                       )
                     ],
                   ),
                   const SizedBox(height: 6),
-                   Text("Order Date",   style:regularNormalTextStyleWithoutHeight(
-                      fontSize: 13.0, color: MyColor.black),),
-                   Text(
-                     Utility.convertDateFormat(orderDetailData.data?.createdAt ?? ""),
-                    style:mediumTextStyle(
-                        fontSize: 14.0, color: MyColor.black),
+                  Text(
+                    "Order Date",
+                    style: regularNormalTextStyleWithoutHeight(
+                        fontSize: 13.0, color: MyColor.black),
+                  ),
+                  Text(
+                    Utility.convertDateFormat(
+                        orderDetailData.data?.createdAt ?? ""),
+                    style:
+                        mediumTextStyle(fontSize: 14.0, color: MyColor.black),
                   ),
                 ],
               ),
@@ -104,20 +128,19 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 color: MyColor.colorF4F3F5,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child:  Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Delivery Address",
-                    style:semiBoldTextStyle(
-                        fontSize: 14.0, color: MyColor.black),
+                    style:
+                        semiBoldTextStyle(fontSize: 14.0, color: MyColor.black),
                   ),
                   hsized5,
                   Text(
                     orderDetailData.data?.deliveryAddress?.address ?? "--",
-
-                    style:regularTextStyle(
-                        fontSize: 13.0, color: MyColor.black),
+                    style:
+                        regularTextStyle(fontSize: 13.0, color: MyColor.black),
                   ),
                 ],
               ),
@@ -133,7 +156,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
-                children: List.generate(orderDetailData.data?.orderItem?.length ?? 0, (index){
+                children: List.generate(
+                    orderDetailData.data?.orderItem?.length ?? 0, (index) {
                   final item = orderDetailData.data!.orderItem![index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 6),
@@ -149,12 +173,18 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           ),
                         ),
                         const SizedBox(width: 12),
-                         Expanded(
-                           child: Text(item.productName ?? "--",style: semiBoldTextStyle(
-                              fontSize: 14.0, color: MyColor.black),),
+                        Expanded(
+                          child: Text(
+                            item.productName ?? "--",
+                            style: semiBoldTextStyle(
+                                fontSize: 14.0, color: MyColor.black),
+                          ),
                         ),
-                        Text("\$${item.price ?? "0"}", style: semiBoldTextStyle(
-                            fontSize: 14.0, color: MyColor.black),),
+                        Text(
+                          "\$${item.price ?? "0"}",
+                          style: semiBoldTextStyle(
+                              fontSize: 14.0, color: MyColor.black),
+                        ),
                       ],
                     ),
                   );
@@ -173,35 +203,54 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
-                children:  [
+                children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Subtotal",style: semiBoldTextStyle(
-                          fontSize: 14.0, color: MyColor.black),),
-                      Text("\$${orderDetailData.data?.totalAmount ?? "0"}",style: semiBoldTextStyle(
-                          fontSize: 14.0, color: MyColor.black),),
+                      Text(
+                        "Subtotal",
+                        style: semiBoldTextStyle(
+                            fontSize: 14.0, color: MyColor.black),
+                      ),
+                      Text(
+                        "\$${orderDetailData.data?.totalAmount ?? "0"}",
+                        style: semiBoldTextStyle(
+                            fontSize: 14.0, color: MyColor.black),
+                      ),
                     ],
                   ),
                   SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Tax",style: semiBoldTextStyle(
-                          fontSize: 14.0, color: MyColor.black),),
-                      Text("+\$${orderDetailData.data?.taxAmount ?? "0"}", style: semiBoldTextStyle(
-                          fontSize: 14.0, color: MyColor.black),),
+                      Text(
+                        "Tax",
+                        style: semiBoldTextStyle(
+                            fontSize: 14.0, color: MyColor.black),
+                      ),
+                      Text(
+                        "+\$${orderDetailData.data?.taxAmount ?? "0"}",
+                        style: semiBoldTextStyle(
+                            fontSize: 14.0, color: MyColor.black),
+                      ),
                     ],
                   ),
-                  Divider(height: 24,color: MyColor.colorE5E7EE,),
+                  Divider(
+                    height: 24,
+                    color: MyColor.colorE5E7EE,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Total", style: semiBoldTextStyle(
-                          fontSize: 16.0, color: MyColor.black),),
-                      Text("\$${orderDetailData.data?.netAmount?? "0"}",
-                          style: boldTextStyle(
-                              fontSize: 16.0, color: MyColor.appTheme),
+                      Text(
+                        "Total",
+                        style: semiBoldTextStyle(
+                            fontSize: 16.0, color: MyColor.black),
+                      ),
+                      Text(
+                        "\$${orderDetailData.data?.netAmount ?? "0"}",
+                        style: boldTextStyle(
+                            fontSize: 16.0, color: MyColor.appTheme),
                       ),
                     ],
                   ),
@@ -217,7 +266,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   Future<void> orderDetailsApi(context) async {
     ApiConnectorConstants.accessToken =
         await PreferencesServices.getPreferencesData(
-            PreferencesServices.userToken) ??
+                PreferencesServices.userToken) ??
             "";
     AllDialogs.progressLoadingDialog(context, true);
     try {
@@ -244,8 +293,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       if (jsonResponse['status'] == true) {
         orderDetailData = OrderDetailModel.fromJson(jsonResponse);
         developer.log(convert.jsonEncode(jsonResponse));
-        setState(() {
-        });
+        setState(() {});
       } else {
         Utility.customToast(context, "${jsonResponse['message']}");
       }
