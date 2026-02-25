@@ -1301,15 +1301,15 @@ class _ShopesclassState extends State<Shopesclass> {
                 ),
 
                 // Loading indicator
-                if (isLoading)
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: isIpad ? 30.0 : 20.0),
-                      child: Center(
-                        child: CircularProgressIndicator(color: MyColor.appTheme),
-                      ),
-                    ),
-                  ),
+                // if (isLoading)
+                //   SliverToBoxAdapter(
+                //     child: Padding(
+                //       padding: EdgeInsets.symmetric(vertical: isIpad ? 30.0 : 20.0),
+                //       child: Center(
+                //         child: CircularProgressIndicator(color: MyColor.appTheme),
+                //       ),
+                //     ),
+                //   ),
               ],
             ),
           ),

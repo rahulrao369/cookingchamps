@@ -60,19 +60,15 @@ class _NewOrderTabState extends State<NewOrderTab> {
             uniqueId: order.uniqueId ?? '',
             amount: order.totalAmount ?? '0',
             orderDate: order.orderDate ?? '',
-            status:(order.deliveryStatus.toString() == "0") ?"New" :"On The Way",
-            statusColor: (order.deliveryStatus.toString() == "0")?Colors.green :MyColor.colorE15C0A,
-            bgColor:  (order.deliveryStatus.toString() == "0")?MyColor.colorF3FFF2:MyColor.colorFFF8F4,
-            icon: (order.deliveryStatus.toString() == "0")?AssetsPath.New:AssetsPath.onTheway,
+            status:(order.deliveryStatus.toString() == "0") ?"New" : (order.deliveryStatus.toString() == "1") ? "Order Received" : (order.deliveryStatus.toString() == "2") ? "Shipped" : (order.deliveryStatus.toString() == "4") ? "Canceled" : "On The Way",
+            statusColor: (order.deliveryStatus.toString() == "0") ? Colors.green : (order.deliveryStatus.toString() == "1") ? Color(0XFF7941AA) : (order.deliveryStatus.toString() == "2") ? Color(0XFFE15C0A) : (order.deliveryStatus.toString() == "4") ? Color(0XFFF30000 ) : MyColor.colorE15C0A,
+            bgColor:  (order.deliveryStatus.toString() == "0") ? MyColor.colorF3FFF2 : MyColor.colorFFF8F4,
+            icon: (order.deliveryStatus.toString() == "0") ? AssetsPath.New : AssetsPath.onTheway,
           ),
         );
       },
     );
   }
-
-
-
-
 
   Widget buildOrderCard({
     required String uniqueId,
@@ -102,12 +98,13 @@ class _NewOrderTabState extends State<NewOrderTab> {
                 fontSize: 14.0,
                 fontWeight: FontWeight.w600,
               ),
+              wSized5,
               Container(
                 color: MyColor.color8C8886,
                 height: 20,
                 width: 2,
               ),
-              wSized3,
+              wSized5,
               DefaultText(
                 title: "\$$amount",
                 fontSize: 14.0,

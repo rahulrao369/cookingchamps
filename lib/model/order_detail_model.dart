@@ -174,7 +174,7 @@ class DeliveryAddress {
   String? id;
   String? parentId;
   String? role;
-  Null? subRole;
+  String? subRole;
   String? name;
   String? address;
   String? addressType;

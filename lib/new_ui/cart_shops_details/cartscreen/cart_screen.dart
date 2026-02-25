@@ -657,8 +657,9 @@ class _CartScreenState extends State<CartScreen> {
                               fontWeight: FontWeight.w600,
                             ),
                           )
-                              : Container(
-                            width: isIpad ? 130.0 : 105.0,
+                              : Flexible(
+                    fit: FlexFit.loose,
+                    child: Container(
                             padding: EdgeInsets.symmetric(
                               horizontal: isIpad ? 10.0 : 5.0,
                               vertical: isIpad ? 8.0 : 0.0,
@@ -784,7 +785,7 @@ class _CartScreenState extends State<CartScreen> {
                                 ),
                               ],
                             ),
-                          ),
+                          )),
                           cardList.data?.role ==
                               RegisterType.roleKids.value
                               ? SizedBox.shrink()

@@ -78,7 +78,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       Text(
                         widget.deliveredType,
                         style:mediumTextStyle(
-                            fontSize: 13.0, color:widget.deliveredType == "On The Way" ? MyColor.colorE15C0A:MyColor.color2721E2),
+                            fontSize: 13.0, color:widget.deliveredType == "On The Way" ? MyColor.colorE15C0A : Colors.green),
                       )
                     ],
                   ),

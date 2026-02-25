@@ -120,7 +120,7 @@ class _AddressListState extends State<AddressList> {
                 ),
                 const SizedBox(height: 16),
                 SizedBox(
-                  height: 320,
+                  height: 250,
                   child: (addressList.data == null || addressList.data!.isEmpty)
                       ? const Center(
                     child: Text(
