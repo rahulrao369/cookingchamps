@@ -6,7 +6,7 @@ import 'dart:developer';
 
 class AiRecipeService {
   // 🔐 OpenAI API Key (DEV ONLY — do NOT ship to production)
-  String _openAiApiKey = String.fromEnvironment('OPENAI_API_KEY');
+  const String _openAiApiKey = "";
 
   // 🌐 OpenAI Chat Completions Endpoint
   static const String _chatEndpoint =
