@@ -9,6 +9,7 @@ class ApiPath {
   static const String imageBaseUrl = "https://cookingchamps.info/";
   static const String videoBaseUrl = "https://cookingchamps.info/public/storage/";
 
+
   ///.....dev
   // static const String baseUrl = "https://dev.cookingchamps.info/api/";
   // static const String imageBaseUrl = "https://dev.cookingchamps.info/";
