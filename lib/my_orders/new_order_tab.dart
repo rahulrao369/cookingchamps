@@ -53,7 +53,7 @@ class _NewOrderTabState extends State<NewOrderTab> {
 
         return GestureDetector(
           onTap: () {
-            selectDeliveredType = (order.deliveryStatus.toString() == "0") ? "New" : "On The Way";
+            selectDeliveredType = (order.deliveryStatus.toString() == "0") ? "New" : (order.deliveryStatus.toString() == "1") ? "Order Received" : (order.deliveryStatus.toString() == "2") ? "Shipped" : (order.deliveryStatus.toString() == "4") ? "Cancelled" : "On The Way";
             CustomNavigators.pushNavigate(OrderDetailsScreen(selectId:order.id ?? "", deliveredType: selectDeliveredType ,), context);
           },
           child: buildOrderCard(
