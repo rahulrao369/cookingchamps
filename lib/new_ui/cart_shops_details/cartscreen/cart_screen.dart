@@ -840,6 +840,18 @@ class _CartScreenState extends State<CartScreen> {
                     '\$${listDataTex?.tax}',
                     isIpad,
                   ),
+                  SizedBox(height: isIpad ? 8.0 : 4.0),
+                  _rowItem(
+                    'Platform Fee',
+                    '\$${listDataTex?.platformFee}',
+                    isIpad,
+                  ),
+                  SizedBox(height: isIpad ? 8.0 : 4.0),
+                  _rowItem(
+                    'Shipping Charge',
+                    '\$${listDataTex?.shippingCharge}',
+                    isIpad,
+                  ),
                   SizedBox(height: isIpad ? 12.0 : 8.0),
                   Divider(
                     height: 1,

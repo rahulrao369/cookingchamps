@@ -26,10 +26,12 @@ class Data {
   List<Items>? items;
   String? subtotal;
   String? tax;
+  String? platformFee;
+  String? shippingCharge;
   String? total;
   String? role;
 
-  Data({this.items, this.subtotal,this.role, this.tax, this.total});
+  Data({this.items, this.subtotal,this.role, this.tax, this.platformFee, this.shippingCharge, this.total});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['items'] != null) {
@@ -40,6 +42,8 @@ class Data {
     }
     subtotal = json['subtotal'];
     tax = json['tax'];
+    platformFee = json['platform_fee'];
+    shippingCharge = json['shipping_charge'];
     role = json['role'];
     total = json['total'];
   }
@@ -52,6 +56,8 @@ class Data {
     data['subtotal'] = this.subtotal;
     data['role'] = this.role;
     data['tax'] = this.tax;
+    data['platform_fee'] = this.platformFee;
+    data['shipping_charge'] = this.shippingCharge;
     data['total'] = this.total;
     return data;
   }
