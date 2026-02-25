@@ -98,7 +98,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                 ? Color(0XFFE15C0A)
                                 : widget.deliveredType == "Cancelled"
                                 ? Color(0XFFF30000)
-                                : MyColor.colorE15C0A,),
+                                : Color(0XFF2721E2),),
                       )
                     ],
                   ),

@@ -59,12 +59,13 @@ class _DeliveredTabState extends State<DeliveredTab> {
                   fontSize: 14.0,
                   fontWeight: FontWeight.w600,
                 ),
+                wSized5,
                 Container(
                   color: MyColor.color8C8886,
                   height: 20,
                   width: 2,
                 ),
-                wSized3,
+                wSized5,
                 DefaultText(
                   title: "₹${order.totalAmount ?? "0"}",
                   fontSize: 14.0,
@@ -80,7 +81,7 @@ class _DeliveredTabState extends State<DeliveredTab> {
                 DefaultText(
                   title: "Delivered",
                   fontSize: 12.0,
-                  color: MyColor.appTheme,
+                  color: Color(0XFF2721E2),
                   fontWeight: FontWeight.w500,
                 ),
               ],
