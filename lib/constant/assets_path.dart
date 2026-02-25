@@ -471,6 +471,10 @@ class AssetsPath {
   static String deleteIcon = "assets/new_ui_images/deleteIcon.svg";
   static String videoPlayIcon = "assets/icons/videoPlayIcon.svg";
 
+  static String cancelledIconNew = "assets/new_ui_images/cancelled_icon_new.svg";
+  static String orderReceivedIconNew = "assets/new_ui_images/order_received_icon_new.svg";
+  static String shippedIconNew = "assets/new_ui_images/shipped_icon_new.svg";
+
 
 
   ///...........avatar.............
