@@ -62,7 +62,7 @@ class _NewOrderTabState extends State<NewOrderTab> {
             orderDate: order.orderDate ?? '',
             status:(order.deliveryStatus.toString() == "0") ?"New" : (order.deliveryStatus.toString() == "1") ? "Order Received" : (order.deliveryStatus.toString() == "2") ? "Shipped" : (order.deliveryStatus.toString() == "4") ? "Canceled" : "On The Way",
             statusColor: (order.deliveryStatus.toString() == "0") ? Colors.green : (order.deliveryStatus.toString() == "1") ? Color(0XFF7941AA) : (order.deliveryStatus.toString() == "2") ? Color(0XFFE15C0A) : (order.deliveryStatus.toString() == "4") ? Color(0XFFF30000 ) : MyColor.colorE15C0A,
-            bgColor:  (order.deliveryStatus.toString() == "0") ? MyColor.colorF3FFF2 : MyColor.colorFFF8F4,
+            bgColor:  (order.deliveryStatus.toString() == "0") ? MyColor.colorF3FFF2 : (order.deliveryStatus.toString() == "1") ? Color(0XFFF2ECF7) : (order.deliveryStatus.toString() == "2") ? Color(0XFFFFF8F4) : (order.deliveryStatus.toString() == "4") ? Color(0XFFFEE6E6)  : MyColor.colorFFF8F4,
             icon: (order.deliveryStatus.toString() == "0") ? AssetsPath.New : (order.deliveryStatus.toString() == "1") ? AssetsPath.orderReceivedIconNew : (order.deliveryStatus.toString() == "2") ? AssetsPath.shippedIconNew : (order.deliveryStatus.toString() == "4") ? AssetsPath.cancelledIconNew : AssetsPath.onTheway,
           ),
         );
