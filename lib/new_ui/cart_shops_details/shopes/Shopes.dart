@@ -793,6 +793,8 @@ class _ShopesclassState extends State<Shopesclass> {
     super.initState();
   }
 
+  bool isCategoryLoading = false;
+
   @override
   void dispose() {
     _scrollController.dispose();
@@ -997,8 +999,12 @@ class _ShopesclassState extends State<Shopesclass> {
                                     right: isIpad ? 15.0 : 10.0,
                                   ),
                                   child: GestureDetector(
-                                    onTap: () {
+                                    onTap: () async {
+                                      if (isCategoryLoading) return; // prevent multiple taps
+
                                       setState(() {
+                                        isCategoryLoading = true;
+
                                         if (selectedIndex == index) {
                                           selectedIndex = -1;
                                           selectIndexIdCat = "";
@@ -1007,34 +1013,71 @@ class _ShopesclassState extends State<Shopesclass> {
                                           selectIndexIdCat =
                                               categories[index].id.toString();
                                         }
+
                                         currentPage = 1;
-                                        shopsDataApi();
                                       });
+
+                                      try {
+                                        await shopsDataApi(); // wait for API
+                                      } catch (e) {
+                                        print("API Error: $e");
+                                      } finally {
+                                        setState(() {
+                                          isCategoryLoading = false;
+                                        });
+                                      }
                                     },
                                     child: Column(
                                       children: [
-                                        Container(
-                                          padding: EdgeInsets.all(isIpad ? 3.0 : 2.0),
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: isSelected
-                                                  ? MyColor.appTheme
-                                                  : Colors.transparent,
-                                              width: isIpad ? 3.0 : 2.0,
+                                        Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Container(
+                                              padding:
+                                              EdgeInsets.all(isIpad ? 3.0 : 2.0),
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color: isSelected
+                                                      ? MyColor.appTheme
+                                                      : Colors.transparent,
+                                                  width: isIpad ? 3.0 : 2.0,
+                                                ),
+                                              ),
+                                              child: ClipOval(
+                                                child: FadeInImage.assetNetwork(
+                                                  placeholder:
+                                                  'assets/new_ui_images/listimage.png',
+                                                  image:
+                                                  "${ApiPath.imageBaseUrl}${category.image}",
+                                                  height: isIpad ? 55.0 : 45.0,
+                                                  width: isIpad ? 55.0 : 45.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                          child: ClipOval(
-                                            child: FadeInImage.assetNetwork(
-                                              placeholder:
-                                              'assets/new_ui_images/listimage.png',
-                                              image:
-                                              "${ApiPath.imageBaseUrl}${category.image}",
-                                              height: isIpad ? 55.0 : 45.0,
-                                              width: isIpad ? 55.0 : 45.0,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
+
+                                            // 🔥 Loader overlay on selected category
+                                            if (isCategoryLoading && isSelected)
+                                              Container(
+                                                height: isIpad ? 55.0 : 45.0,
+                                                width: isIpad ? 55.0 : 45.0,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black.withOpacity(0.4),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Center(
+                                                  child: SizedBox(
+                                                    height: 18,
+                                                    width: 18,
+                                                    child: CircularProgressIndicator(
+                                                      strokeWidth: 2,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                          ],
                                         ),
                                         SizedBox(height: isIpad ? 8.0 : 5.0),
                                         Container(
@@ -1058,6 +1101,81 @@ class _ShopesclassState extends State<Shopesclass> {
                               },
                             ),
                           ),
+                          // Container(
+                          //   height: isIpad ? 100.0 : 80.0,
+                          //   child: ListView.builder(
+                          //     scrollDirection: Axis.horizontal,
+                          //     itemCount: categories.length,
+                          //     itemBuilder: (context, index) {
+                          //       final category = categories[index];
+                          //       final isSelected = index == selectedIndex;
+                          //
+                          //       return Padding(
+                          //         padding: EdgeInsets.only(
+                          //           right: isIpad ? 15.0 : 10.0,
+                          //         ),
+                          //         child: GestureDetector(
+                          //           onTap: () {
+                          //             setState(() {
+                          //               if (selectedIndex == index) {
+                          //                 selectedIndex = -1;
+                          //                 selectIndexIdCat = "";
+                          //               } else {
+                          //                 selectedIndex = index;
+                          //                 selectIndexIdCat =
+                          //                     categories[index].id.toString();
+                          //               }
+                          //               currentPage = 1;
+                          //               shopsDataApi();
+                          //             });
+                          //           },
+                          //           child: Column(
+                          //             children: [
+                          //               Container(
+                          //                 padding: EdgeInsets.all(isIpad ? 3.0 : 2.0),
+                          //                 decoration: BoxDecoration(
+                          //                   shape: BoxShape.circle,
+                          //                   border: Border.all(
+                          //                     color: isSelected
+                          //                         ? MyColor.appTheme
+                          //                         : Colors.transparent,
+                          //                     width: isIpad ? 3.0 : 2.0,
+                          //                   ),
+                          //                 ),
+                          //                 child: ClipOval(
+                          //                   child: FadeInImage.assetNetwork(
+                          //                     placeholder:
+                          //                     'assets/new_ui_images/listimage.png',
+                          //                     image:
+                          //                     "${ApiPath.imageBaseUrl}${category.image}",
+                          //                     height: isIpad ? 55.0 : 45.0,
+                          //                     width: isIpad ? 55.0 : 45.0,
+                          //                     fit: BoxFit.cover,
+                          //                   ),
+                          //                 ),
+                          //               ),
+                          //               SizedBox(height: isIpad ? 8.0 : 5.0),
+                          //               Container(
+                          //                 width: isIpad ? 80.0 : 60.0,
+                          //                 child: Text(
+                          //                   category.name ?? "",
+                          //                   textAlign: TextAlign.center,
+                          //                   maxLines: 1,
+                          //                   overflow: TextOverflow.ellipsis,
+                          //                   style: TextStyle(
+                          //                     fontSize: isIpad ? 14.0 : 11.0,
+                          //                     color: Colors.black,
+                          //                     fontWeight: FontWeight.w500,
+                          //                   ),
+                          //                 ),
+                          //               ),
+                          //             ],
+                          //           ),
+                          //         ),
+                          //       );
+                          //     },
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -1300,6 +1418,7 @@ class _ShopesclassState extends State<Shopesclass> {
                   ),
                 ),
 
+
                 // Loading indicator
                 // if (isLoading)
                 //   SliverToBoxAdapter(
@@ -1363,7 +1482,12 @@ class _ShopesclassState extends State<Shopesclass> {
     }
   }
 
+  bool isShopsLoading = false;
+
   Future<void> shopsDataApi() async {
+    setState(() {
+      isShopsLoading = true;
+    });
     if (isLoading) return;
 
     isLoading = true;
@@ -1425,6 +1549,9 @@ class _ShopesclassState extends State<Shopesclass> {
       print("Error in shopsDataApi: $error");
     } finally {
       isLoading = false;
+      setState(() {
+        isShopsLoading = false;
+      });
     }
   }
 

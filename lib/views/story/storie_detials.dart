@@ -798,6 +798,7 @@ class _StoriesDetailsViewState extends State<StoriesDetailsView> {
                           ),
                         ),
                       ),
+                      storyModel.role == "parent" ?
                       Padding(
                         padding: EdgeInsets.only(
                             top: isIpad ? 30 : 20,
@@ -831,7 +832,7 @@ class _StoriesDetailsViewState extends State<StoriesDetailsView> {
                             ),
                           ),
                         ),
-                      )
+                      ) : SizedBox.shrink()
                     ],
                   )
                 ],

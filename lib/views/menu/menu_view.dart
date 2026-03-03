@@ -108,18 +108,44 @@ class _MenuViewState extends State<MenuView> {
               child: Column(
                 children: [
                   hsized10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 5,
-                        decoration: const BoxDecoration(
-                            color: MyColor.liteGrayB5B5B5,
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(20))),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: Colors.transparent, width: 1
+                                )
+                            ),
+                            child: Icon(Icons.close, color: Colors.transparent,)),
+                        Container(
+                          width: 100,
+                          height: 5,
+                          decoration: const BoxDecoration(
+                              color: MyColor.liteGrayB5B5B5,
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(20))),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: MyColor.grey, width: 1
+                                )
+                              ),
+                              child: Icon(Icons.close)),
+                        )
+                      ],
+                    ),
                   ),
                   Expanded(
                     child: SingleChildScrollView(

@@ -733,7 +733,7 @@ class _RegisterNewViewState extends State<RegisterNewView> {
                             hintText: 'Enter mobile number',
                             textInputAction: TextInputAction.done,
                             textInputType: TextInputType.number,
-                            isTablet: isTablet, // ✅ Pass isTablet
+                            isTablet: isTablet,
                             prefixWidget: Container(
                               padding: EdgeInsets.only(
                                 left: isTablet ? 12 : 8,
@@ -742,15 +742,13 @@ class _RegisterNewViewState extends State<RegisterNewView> {
                               child: CountryCodePicker(
                                 onChanged: (code) {
                                   setState(() {
-                                    selectedCountryCode = code.dialCode ?? '+91';
+                                    selectedCountryCode = code.dialCode ?? '+61'; // ✅ Australia fallback
                                   });
                                 },
-                                initialSelection: 'IN',
-                                favorite: ['+91', 'IN'],
+                                initialSelection: 'AU',        // ✅ Default country Australia
+                                favorite: ['+61', 'AU'],       // ✅ Optional favorites
                                 showCountryOnly: false,
                                 showOnlyCountryWhenClosed: false,
-                                // alignLeft: true,
-                                // showFlag: false,
                                 padding: EdgeInsets.zero,
                                 textStyle: regularTextStyle(
                                   fontSize: isTablet ? 16.0 : 14.0,

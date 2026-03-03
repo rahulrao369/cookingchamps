@@ -54,7 +54,7 @@ class _KidsLearningPaymentState extends State<KidsLearningPayment> {
                           hsized5,
                           Text(
                             textAlign: TextAlign.center,
-                            "One-time payment of just \$${widget.subscriptionAmount}/year per child",
+                            "One-time payment of just A\$${widget.subscriptionAmount}/year per child",
                             style: mediumTextStyle(
                                 fontSize: 16.0, color: MyColor.white),
                           ),
@@ -214,7 +214,7 @@ class _KidsLearningPaymentState extends State<KidsLearningPayment> {
                         wSized15,
                         Text(
                           textAlign: TextAlign.center,
-                          "Start Full Course for \$${widget.subscriptionAmount}/year",
+                          "Start Full Course for A\$${widget.subscriptionAmount}/year",
                           style: regularTextStyle(
                               fontSize: 14.0, color: MyColor.white),
                         ),
@@ -277,7 +277,7 @@ class _KidsLearningPaymentState extends State<KidsLearningPayment> {
                       wSized5,
                       Expanded(
                         child: Text(
-                          "Unlock all 12 interactive learning chapters for only \$${widget.subscriptionAmount}/year per child.",
+                          "Unlock all 12 interactive learning chapters for only A\$${widget.subscriptionAmount}/year per child.",
                           style: regularTextStyle(
                             fontSize: 14.0,
                             color: MyColor.color555555,
@@ -380,7 +380,7 @@ class _KidsLearningPaymentState extends State<KidsLearningPayment> {
                           const Icon(Icons.lock, color: Colors.white),
                           wSized15,
                           Text(
-                            "Start Now – \$${widget.subscriptionAmount}/year",
+                            "Start Now – A\$${widget.subscriptionAmount}/year",
                             style: regularTextStyle(
                               fontSize: 14.0,
                               color: MyColor.white,

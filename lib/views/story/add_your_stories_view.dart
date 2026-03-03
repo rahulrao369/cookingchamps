@@ -1520,28 +1520,73 @@ class _AddYourStoriesViewState extends State<AddYourStoriesView> {
     });
   }
 
+  /// 02/03
+  // StoryModel storyModel = StoryModel();
+  // editStories(bool check) async {
+  //   if (widget.storyid.toString() != "null") {
+  //     AddStoriesRequest addStoriesRequest = AddStoriesRequest(
+  //         storyid: widget.storyid!.toString(),
+  //         title: titleController.text,
+  //         description: storyController.text,
+  //         storiesVideolink: storyvideolinkController.text);
+  //     await ApiServices.editStories(
+  //         context, addStoriesRequest, selectedImage1, imageFileList)
+  //         .then((onValue) {
+  //       print("oncall>>>>>>>${onValue}");
+  //       if (onValue.status == true) {
+  //         storyModel = StoryModel.fromJson(onValue.data);
+  //         var data = StoryModel.fromJson(onValue.data);
+  //         // selectedImage1 = File(storyModel.image.toString());
+  //         titleController.text = storyModel.title.toString();
+  //         storyController.text = storyModel.description.toString();
+  //         widget.onCallback();
+  //         check == true ? Navigator.pop(context) : null;
+  //       }
+  //     });
+  //   }
+  // }
+
   StoryModel storyModel = StoryModel();
+
   editStories(bool check) async {
-    if (widget.storyid.toString() != "null") {
+    if (widget.storyid != null) {
       AddStoriesRequest addStoriesRequest = AddStoriesRequest(
-          storyid: widget.storyid!.toString(),
-          title: titleController.text,
-          description: storyController.text,
-          storiesVideolink: storyvideolinkController.text);
-      await ApiServices.editStories(
-          context, addStoriesRequest, selectedImage1, imageFileList)
-          .then((onValue) {
-        print("oncall>>>>>>>${onValue}");
-        if (onValue.status == true) {
-          storyModel = StoryModel.fromJson(onValue.data);
-          var data = StoryModel.fromJson(onValue.data);
-          // selectedImage1 = File(storyModel.image.toString());
-          titleController.text = storyModel.title.toString();
-          storyController.text = storyModel.description.toString();
-          widget.onCallback();
-          check == true ? Navigator.pop(context) : null;
+        storyid: widget.storyid!.toString(),
+        title: titleController.text,
+        description: storyController.text,
+        storiesVideolink: storyvideolinkController.text,
+      );
+
+      final onValue = await ApiServices.editStories(
+        context,
+        addStoriesRequest,
+        selectedImage1,
+        imageFileList,
+      );
+
+      print("oncall>>>>>>>$onValue");
+      print("Data>>>>>>>>> ${onValue.data}");
+
+      // ✅ SAFE CHECK
+      if (onValue.status == true && onValue.data != null) {
+        storyModel = StoryModel.fromJson(onValue.data);
+
+        titleController.text = storyModel.title ?? "";
+        storyController.text = storyModel.description ?? "";
+
+        widget.onCallback();
+
+        if (check == true) {
+          Navigator.pop(context);
         }
-      });
+      } else {
+        // 🔥 Handle API error properly
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(onValue.message ?? "Something went wrong"),
+          ),
+        );
+      }
     }
   }
 

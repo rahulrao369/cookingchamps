@@ -194,6 +194,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    debugPrint("User Name :- ${userDetails.name}");
     return Scaffold(
       backgroundColor:
           (colorBg == true) ? Colors.transparent : MyColor.appTheme,
@@ -1646,6 +1647,8 @@ class _HomeViewState extends State<HomeView> {
                                         children: List.generate(
                                             featuredStoryList.length,
                                             (int index) {
+                                              debugPrint(">>>>>> featuredStoryList.length :- ${featuredStoryList.length} <<<<< ");
+                                              log(">>>>> Featured Story Print :- $featuredStoryList <<<<<< ");
                                           return Padding(
                                             padding: const EdgeInsets.only(
                                                 left: 5,

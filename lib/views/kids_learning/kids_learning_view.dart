@@ -753,6 +753,7 @@ class _KidsLearningViewState extends State<KidsLearningView> {
                     borderRadius: BorderRadius.circular(isIpad ? 35.0 : 27.0),
                     rippleColor: Colors.white,
                     onTap: () {
+                      debugPrint("Subscription Not needed");
                       final bool isLocked = !unlockChapter && index >= 3;
                       debugPrint("Amount:- ${myChildList
                           ?.data?.subscriptionAmount?.amount
@@ -793,6 +794,7 @@ class _KidsLearningViewState extends State<KidsLearningView> {
                 (!unlockChapter && index >= 3)
                     ? GestureDetector(
                   onTap: () {
+                    debugPrint("Subscription needed");
                     debugPrint("Amount 02 :- ${myChildList
                         ?.data?.subscriptionAmount?.amount
                         .toString()}");

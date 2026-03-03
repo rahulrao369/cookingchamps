@@ -93,7 +93,6 @@ class _MyAppState extends State<MyApp> {
     return MediaQuery(
       data: data.copyWith(textScaleFactor: 1.0),
       child: MaterialApp(
-
         debugShowCheckedModeBanner: false,
         navigatorKey: navigatorKey,
         title: 'Cooking Champs',

@@ -328,7 +328,9 @@ class _LetCreateYourKidState extends State<LetCreateYourKid> {
                                     "Year",
                                     // Languages.of(context)!.selectyourcampyear.toString(),
                                     "Year",
-                                    yearOnTap),
+                                    // yearOnTap
+                                    openYearPickerDialog
+                                ),
                               ],
                             ),
                           ),
@@ -348,7 +350,9 @@ class _LetCreateYourKidState extends State<LetCreateYourKid> {
                                     "Month",
                                     // Languages.of(context)!.selectyourcampmanth.toString(),
                                     "Month",
-                                    monthOnTap),
+                                    // monthOnTap
+                                    openMonthPickerDialog
+                                ),
                               ],
                             ),
                           ),
@@ -367,7 +371,9 @@ class _LetCreateYourKidState extends State<LetCreateYourKid> {
 
                                     // Languages.of(context)!.selectyourcampbornday.toString(),
                                     "Day",
-                                    dayOnTap),
+                                    // dayOnTap
+                                    openDayPickerDialog
+                                ),
                               ],
                             ),
                           )
@@ -912,6 +918,174 @@ class _LetCreateYourKidState extends State<LetCreateYourKid> {
 
     isFocusColor = "emailstar";
     setState(() {});
+  }
+
+  void openYearPickerDialog() {
+    final int endYear = DateTime.now().year - 1;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          contentPadding: const EdgeInsets.all(16),
+          content: SizedBox(
+            height: 300,
+            width: double.maxFinite,
+            child: YearPicker(
+              firstDate: DateTime(2010),
+              lastDate: DateTime(endYear), // ✅ current year - 5
+              selectedDate: DateTime(endYear), // optional: preselect last allowed year
+              onChanged: (DateTime dateTime) {
+                setState(() {
+                  yearController.text = dateTime.year.toString();
+                });
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void openMonthPickerDialog()
+  {
+    final List<String> months = [
+      'January','February','March','April','May','June',
+      'July','August','September','October','November','December'
+    ];
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          contentPadding: const EdgeInsets.all(16),
+          content: SizedBox(
+            width: double.maxFinite,
+            height: 250,
+            child: GridView.builder(
+              itemCount: months.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 2.5,
+              ),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    final selectedMonth1 =
+                    (index + 1).toString().padLeft(2, '0');
+
+                    setState(() {
+                      selectedMonth = index + 1;
+
+                      final now = DateTime.now();
+                      final formattedDate =
+                          "${now.year}-$selectedMonth1-01 00:00:00.000";
+
+                      selectDate2 = formattedDate;
+
+                      // ✅ Show month NAME instead of number
+                      monthController.text = months[index];
+                    });
+
+                    isFocusColor = "parentEmail";
+
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.orange.shade400,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      months[index],
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void openDayPickerDialog() {
+
+    if (yearController.text.isEmpty || selectedMonth == null) {
+      return; // prevent opening if year or month not selected
+    }
+
+    final int selectedYear = int.parse(yearController.text);
+
+    // Trick to get total days in selected month
+    final int totalDays =
+        DateTime(selectedYear, selectedMonth! + 1, 0).day;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          contentPadding: const EdgeInsets.all(16),
+          content: SizedBox(
+            width: double.maxFinite,
+            height: 280,
+            child: GridView.builder(
+              itemCount: totalDays,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 7,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                childAspectRatio: 1,
+              ),
+              itemBuilder: (context, index) {
+                final int day = index + 1;
+
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      dayController.text = day.toString();
+                    });
+
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.orange.shade400,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      day.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 
   onUpdate() {

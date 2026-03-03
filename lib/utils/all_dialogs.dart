@@ -101,6 +101,8 @@ class AllDialogs {
     ).then((value) {});
   }
 
+
+
   ///----------------------- InterNet connectvity Alert Dialog -------------------------
   static void noInternetDialog(BuildContext context, var page) {
     showDialog(

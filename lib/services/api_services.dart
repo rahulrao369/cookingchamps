@@ -110,7 +110,7 @@ class ApiServices {
       if (jsonResponse != null) {
         commonResponse = CommonResponse.fromJson(jsonResponse);
         debugPrint("jsonResponse['data']...${jsonResponse['data']}");
-        Utility.customToast(context, commonResponse.error ?? "");
+        Utility.customToast(context, jsonResponse['message'] ?? "");
 
         if (jsonResponse['data'] != null) {
           if (jsonResponse['data'] is Map) {
